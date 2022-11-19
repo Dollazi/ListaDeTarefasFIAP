@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { use } from 'react';
-import { json } from 'stream/consumers';
 import { connectToDB } from '../../middlewares/connectToDB';
-import { UserModel } from '../../models/User';
 import { DefaultMessageResponse } from '../../types/DefaultMessageResponse';
-import CryptoJS from "crypto-js";
 import { jwtValidator } from '../../middlewares/jwtValidator';
 import { TaskModel } from '../../models/Task';
 import { Task } from '../../types/Task';

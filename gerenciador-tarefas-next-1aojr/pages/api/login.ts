@@ -42,8 +42,6 @@ export default async (requisicao: NextApiRequest, resposta: NextApiResponse<Defa
 
 
         if (password === savedPassword) {
-
-            console.log(user._id)
             const token = jwt.sign({_id: user._id}, MY_SECRET_KEY);
 
             const result = {
