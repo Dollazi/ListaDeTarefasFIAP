@@ -1,23 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { json } from 'stream/consumers';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { UserModel } from '../../models/User';
 import { DefaultMessageResponse } from '../../types/DefaultMessageResponse';
 import { User } from '../../types/User';
 import CryptoJS from "crypto-js";
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import { connectToDB } from '../../middlewares/connectToDB';
 
-export default async (requisicao: NextApiRequest, resposta: NextApiResponse<DefaultMessageResponse | any>) => {
-
+const loginEndpoint = async function (requisicao: NextApiRequest, resposta: NextApiResponse<DefaultMessageResponse | any>) {
     try {
-
         if (requisicao.method !== 'POST') {
             return resposta.status(405).json({ error: 'Método informado não existe' });
         }
 
         const {MY_SECRET_KEY} = process.env;
-
-        if (!MY_SECRET_KEY){
-            return resposta.status(500).json({error: 'Env MY_SECRET_KEY não informada'});
+        if(!MY_SECRET_KEY){
+            return resposta.status(500).json({error : 'Env MY_SECRET_KEY não informada'});
         }
 
         if (!requisicao.body) {
@@ -27,19 +24,17 @@ export default async (requisicao: NextApiRequest, resposta: NextApiResponse<Defa
         const { login, password } = requisicao.body;
 
         if(!login || !password){
-            return resposta.status(400).json({ error: 'Favor informar login e senha' });
+            return resposta.status(400).json({ error: 'Favor informar os dados para autenticação' });
         }
 
-        const existUserWithEmail = await UserModel.find({email: login});
-
-        if(!existUserWithEmail || existUserWithEmail.length === 0){
+        const existsUserWithEmail = await UserModel.find({email: login});
+        if(!existsUserWithEmail || existsUserWithEmail.length === 0){
             return resposta.status(400).json({ error: 'Usuário e senha não conferem' });
         }
 
-        const user = existUserWithEmail[0] as User;
-        const bytes = CryptoJS.AES.decrypt(user.password, 'MY_SECRET_KEY')
+        const user = existsUserWithEmail[0] as User;
+        const bytes  = CryptoJS.AES.decrypt(user.password, MY_SECRET_KEY);
         const savedPassword = bytes.toString(CryptoJS.enc.Utf8);
-
 
         if (password === savedPassword) {
             const token = jwt.sign({_id: user._id}, MY_SECRET_KEY);
@@ -54,9 +49,10 @@ export default async (requisicao: NextApiRequest, resposta: NextApiResponse<Defa
         }
 
         return resposta.status(400).json({ error: 'Usuário e senha não conferem' });
-
     } catch (e: any) {
         console.log('Ocorreu erro ao logar usuário:', e);
-        resposta.status(500).json({ error: 'Ocorreu erro ao logar usuário, tente novamente...' });
+        return resposta.status(500).json({ error: 'Ocorreu erro ao logar usuário, tente novamente....' });
     }
 }
+
+export default connectToDB(loginEndpoint);
