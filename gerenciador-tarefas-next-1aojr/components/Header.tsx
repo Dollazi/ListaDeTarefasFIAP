@@ -1,19 +1,20 @@
 import type { NextPage } from "next";
 
 type HeaderProps = {
-    sair(): void
+    sair(): void,
+    showModal():void
 }
-export const Header : NextPage<HeaderProps> = ({sair}) => {
+export const Header : NextPage<HeaderProps> = ({sair, showModal}) => {
     return (
         <div className="container-header">
             <img src="/logo.svg" alt="Logo Fiap" className="logo"/>
-            <button><span>+</span>Adicionar Tarefa</button>
+            <button onClick={showModal}><span>+</span>Adicionar Tarefa</button>
             <div className="mobile">
-                <span>Olá, </span>
+                <span>Olá, {localStorage.getItem('name')}</span>
                 <img src="/exit-mobile.svg" alt="Sair" onClick={sair}/>
             </div>
             <div className="desktop">
-                <span>Olá, </span>
+                <span>Olá, {localStorage.getItem('name')}</span>
                 <img src="/exit-desktop.svg" alt="Sair" onClick={sair}/>
             </div>
         </div>
