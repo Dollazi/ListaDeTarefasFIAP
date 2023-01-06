@@ -3,13 +3,19 @@ import { useState } from "react";
 import { Modal, ModalBody } from "react-bootstrap";
 import { Footer } from "../components/Footer";
 import { executeRequest } from "../services/api";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import { Register } from "./Register";
+import { type } from "os";
 
 type LoginProps = {
     setToken(s: string): void
 }
 
-export const Login: NextPage<LoginProps> = ({ setToken}) => {
+type RegisterProps = {
+    setTokenRegister(s: string): void
+}
+
+export const Login: NextPage<LoginProps> = ({ setToken }) => {
 
     //STATES DO FILTER
     const [login, setLogin] = useState('');
@@ -81,12 +87,12 @@ export const Login: NextPage<LoginProps> = ({ setToken}) => {
                     />
                 </div>
                 <button onClick={doLogin} disabled={loading}>{loading ? '...Carregando' : 'Login'} </button>   
-                {/* <div className="text-center">
+                <div className="container-register">
                     <span className="NullConta">Não possui conta? </span>
-                    <Link className="CreateConta" to="#">
+                    <Link href="/Register">
                         Criar conta
                     </Link>
-                </div> */}
+                </div>
             </div>
         </div>
     );

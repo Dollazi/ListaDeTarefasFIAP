@@ -22,6 +22,7 @@
     "node-sass": "^7.0.3",
     "react": "18.2.0",
     "react-bootstrap": "^2.6.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.6.1",
     "sass": "^1.56.1",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
-    "@types/jsonwebtoken": "^8.5.9"
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/react-datepicker": "^4.8.0"
   }
 }

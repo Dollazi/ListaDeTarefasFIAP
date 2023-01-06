@@ -1,5 +1,6 @@
 import { Login } from "../containers/Login";
 import { Home } from "../containers/Home";
+import { Register } from "../containers/Register"; 
 import { useState, useEffect } from "react";
 
 export default function Index() {
@@ -13,5 +14,6 @@ export default function Index() {
     }
   }, []);
 
-  return token ? <Home setToken={setToken}/> : <Login setToken={setToken}/>;
+  return token ? <Home setToken={setToken}/> : <Login setToken={setToken}/>;   
+
 }

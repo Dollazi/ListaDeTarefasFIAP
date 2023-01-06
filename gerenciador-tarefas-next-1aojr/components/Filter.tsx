@@ -25,11 +25,11 @@ export const Filter : NextPage<FilterProps> = ({
                 <div className="form">
                 <div>
                     <label>Data prevista de conclusão</label>
-                    <input type="date" value={previsionDateStart} onChange={e => setPrevisionDateStart(e.target.value)}/>
+                    <input type="datetime-local" value={previsionDateStart} onChange={e => setPrevisionDateStart(e.target.value)}/>
                 </div>
                 <div>
                     <label>até</label>
-                    <input type="date" value={previsionDateEnd} onChange={e => setPrevisionDateEnd(e.target.value)}/>
+                    <input type="datetime-local" value={previsionDateEnd} onChange={e => setPrevisionDateEnd(e.target.value)}/>
                 </div>
                 <div className="separator"/>
                 <div>
@@ -45,11 +45,11 @@ export const Filter : NextPage<FilterProps> = ({
             {showFilter && <div className="mobiles-filters">
                 <div>
                     <label>Data de previsão de:</label>
-                    <input type="date" value={previsionDateStart} onChange={e => setPrevisionDateStart(e.target.value)}/>
+                    <input type="datetime-local" value={previsionDateStart} onChange={e => setPrevisionDateStart(e.target.value)}/>
                 </div>
                 <div>
                     <label>Data de previsão até:</label>
-                    <input type="date" value={previsionDateEnd} onChange={e => setPrevisionDateEnd(e.target.value)}/>
+                    <input type="datetime-local" value={previsionDateEnd} onChange={e => setPrevisionDateEnd(e.target.value)}/>
                 </div>
                 <div>
                     <label>Status:</label>
