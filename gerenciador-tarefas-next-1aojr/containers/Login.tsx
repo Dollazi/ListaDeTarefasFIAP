@@ -1,11 +1,7 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import { Modal, ModalBody } from "react-bootstrap";
-import { Footer } from "../components/Footer";
 import { executeRequest } from "../services/api";
-import Link from "next/link";
-import { Register } from "./Register";
-import { type } from "os";
+import React from "react";
 
 type LoginProps = {
     setToken(s: string): void
@@ -58,15 +54,6 @@ export const Login: NextPage<LoginProps> = ({ setToken }) => {
         setLoading(false);
     }
 
-    const doRegister = async () => {
-        try{
-
-        }catch(e : any){
-            console.log(`Erro ao realizar o cadastro: ${e}`);
-        }
-        setLoading(false);
-    }
-
     return (
         <div className="container-login">
             <img src="/logo.svg" alt="Logo Fiap" className="logo" />
@@ -86,13 +73,7 @@ export const Login: NextPage<LoginProps> = ({ setToken }) => {
                         onChange={evento => setPassword(evento.target.value)}
                     />
                 </div>
-                <button onClick={doLogin} disabled={loading}>{loading ? '...Carregando' : 'Login'} </button>   
-                <div className="container-register">
-                    <span className="NullConta">Não possui conta? </span>
-                    <Link href="/Register">
-                        Criar conta
-                    </Link>
-                </div>
+                <button onClick={doLogin} disabled={loading}>{loading ? '...Carregando' : 'Login'} </button>                
             </div>
         </div>
     );

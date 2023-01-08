@@ -8,7 +8,7 @@ export const executeRequest = (endpoint: string, method: Method, body? : any) =>
         headers['Authorization'] = 'Bearer ' + token;
     }
     
-    const URL = 'http://localhost:3000/api/'+endpoint;
+    const URL = 'http://localhost:3000/api/'+ endpoint;
     console.log(`executando: ${URL}, método: ${method} e body: ${body}`);
     return axios.request({
         url: URL,
